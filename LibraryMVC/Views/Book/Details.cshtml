@@ -1,0 +1,46 @@
+﻿@model LibraryMVC.Models.Book
+
+@{
+    ViewData["Title"] = "Карточка книги";
+}
+
+<h1>📖 @Model.Title</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Основная информация</h5>
+                <p><strong>Автор:</strong> @Model.Author</p>
+                <p><strong>Год издания:</strong> @Model.Year</p>
+                <p><strong>Жанр:</strong> @Model.Genre</p>
+                <p><strong>Страниц:</strong> @Model.Pages</p>
+                <p><strong>ISBN:</strong> @Model.ISBN</p>
+                <p><strong>Добавлено:</strong> @Model.DateAdded?.ToString("dd.MM.yyyy")</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">📋 XML-оглавление</h5>
+                @if (!string.IsNullOrEmpty(Model.SchemaXml))
+                {
+                    <div style="max-height: 400px; overflow-y: auto; background: #f8f9fa; padding: 10px; border-radius: 5px;">
+                        <pre style="margin: 0; white-space: pre-wrap; word-wrap: break-word; font-size: 12px;">@Model.SchemaXml</pre>
+                    </div>
+                }
+                else
+                {
+                    <p class="text-muted">XML-оглавление не задано</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-3">
+    <a asp-action="Edit" asp-route-id="@Model.BookID" class="btn btn-warning">✏️ Редактировать</a>
+    <a asp-action="Index" class="btn btn-secondary">⬅️ Назад к списку</a>
+</div>

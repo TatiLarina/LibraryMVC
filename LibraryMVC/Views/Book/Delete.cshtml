@@ -1,0 +1,14 @@
+﻿@model LibraryMVC.Models.Book
+@{
+    ViewData["Title"] = "Удалить книгу";
+}
+
+<h1>🗑️ Удаление</h1>
+
+<p>Вы действительно хотите удалить книгу <strong>"@Model.Title"</strong>?</p>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="BookID" />
+    <button type="submit" class="btn btn-danger">Да, удалить</button>
+    <a asp-action="Index" class="btn btn-secondary">Отмена</a>
+</form>

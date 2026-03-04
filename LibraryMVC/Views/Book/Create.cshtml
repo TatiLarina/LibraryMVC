@@ -1,0 +1,49 @@
+﻿@model LibraryMVC.Models.Book
+@{
+    // ✅ Проверка на null перед обращением к Model.BookID
+    ViewData["Title"] = (Model?.BookID ?? 0) == 0
+        ? "Добавить книгу"
+        : "Редактировать книгу";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="@(Model.BookID == 0 ? "Create" : "Edit")" method="post">
+    @if (Model.BookID != 0)
+    {
+        <input type="hidden" asp-for="BookID" />
+    }
+
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label">Название *</label>
+        <input asp-for="Title" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Author" class="form-label">Автор *</label>
+        <input asp-for="Author" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Year" class="form-label">Год издания</label>
+        <input asp-for="Year" type="number" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Genre" class="form-label">Жанр</label>
+        <input asp-for="Genre" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Pages" class="form-label">Страниц</label>
+        <input asp-for="Pages" type="number" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ISBN" class="form-label">ISBN</label>
+        <input asp-for="ISBN" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-success">💾 Сохранить</button>
+    <a asp-action="Index" class="btn btn-secondary">Отмена</a>
+</form>
